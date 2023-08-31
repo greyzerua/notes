@@ -1,0 +1,109 @@
+body {
+	background-color: #c9dfeb;
+	padding: 50px;
+}
+input {
+	border-radius: 10px;
+	border: none;
+	padding-left: 10px;
+	width: 300px;
+	height:50px;
+	font-size: 18px;
+}
+.btn-create {
+	border-radius: 10px;
+	border: none;
+	padding: 9px;
+	width: 150px;
+	height:50px;
+	font-size: 18px;
+	color:white;
+	background-color: #ef5d28;
+	margin-left: 10px;
+	transition: 0.3s ease;
+}
+.btn-create:hover {
+	background-color:#ff8707;
+}
+input:focus {
+    outline: none;
+}
+div.container{
+	margin-right: 10px;
+	padding: 5px 10px;
+	background-color: white;
+	border-radius:10px;
+	min-width: 10%;
+
+}
+div.wrapper {
+	display: flex;
+	margin-top:20px;
+}
+h1 {
+	font-size: 30px;
+	text-align: center;
+	margin: 0px 5px;
+	color:#ef5d28;
+}
+ul{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+	list-style-type: none;
+}
+li{
+	width: 100%;
+}
+.container button{
+	margin-bottom: 8px;
+}
+.container button:last-child{
+	margin-bottom: 0px;
+}
+.btn-done{
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+	margin: 0 auto;
+	border: none;
+	width: 90%;
+	padding: 10px 27px;
+	font-size: 20px;
+	color: white;
+	background-color: #5eab47;
+	transition: 0.3s ease;
+}
+.btn-done:hover{
+	background-color: #3c8327;
+}
+.btn-color{
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+	margin: 0 auto;
+	border: none;
+	padding: 10px 27px;
+	width: 90%;
+	font-size: 20px;
+	color: white;
+	background-color: #858585;
+	transition: 0.3s ease;
+}
+.btn-color:hover{
+	transform: scale(1.1);
+}
+.btn-green{
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+}
+.changeInp{
+	display: flex;
+	border: 1px solid #3c8327;
+	font-size: 18px;
+	margin:0 auto 8px;
+	width: 90%;
+}
