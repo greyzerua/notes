@@ -24,6 +24,8 @@ function doneButtonClick (listItem, block, title, btnDelete, btnChange, btnDone,
 	removeElement(btnDone);
 	listItem.append(btnBack);
 	listItem.insertBefore(btnBack, listItem.firstChild);
+
+
 }
 function backButtonClick (block, btnDelete, listItem, title) {
 	block.style.backgroundColor = null;
@@ -34,18 +36,22 @@ function backButtonClick (block, btnDelete, listItem, title) {
 	listItem.classList.remove('btn-green');
 	let btnDone = createDoneBtn();
 	let btnChange = createChangeBtn();
-
+	let btnBack = createBackBtn();
 	btnDone.addEventListener('click', () => {
 			doneButtonClick(listItem, block, title, btnDelete, btnChange, btnDone, btnBack);
 	});
-	
+
 	btnChange.addEventListener('click', () => {
 		changeButtonClick(title, listItem, block);
 		removeElement(btnChange)
 		removeElement(btnDone)
 		removeElement(btnDelete)
 	});
-
+	
+	btnBack.addEventListener('click', () => {
+			backButtonClick(block, btnDelete, listItem, title);
+			removeElement(btnBack);
+		});
 	listItem.append(btnDone, btnChange, btnChange);
 	listItem.insertBefore(btnDelete, listItem.nextSibling);
 }
