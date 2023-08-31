@@ -47,13 +47,46 @@ function backButtonClick (block, btnDelete, listItem, title) {
 		removeElement(btnDone)
 		removeElement(btnDelete)
 	});
-	
+
 	btnBack.addEventListener('click', () => {
 			backButtonClick(block, btnDelete, listItem, title);
 			removeElement(btnBack);
 		});
 	listItem.append(btnDone, btnChange, btnChange);
 	listItem.insertBefore(btnDelete, listItem.nextSibling);
+}
+function onTaskChangeName(listItem, title, block, changeInput, okBtn) {
+		title.textContent = changeInput.value
+
+		block.append(title)
+		block.insertBefore(title, block.firstChild)
+		removeElement(changeInput);
+		removeElement(okBtn);
+
+		let btnDone = createDoneBtn();
+		let btnChange = createChangeBtn();
+		let btnBack = createBackBtn();
+		let changeBtn = createChangeBtn();
+		let btnDelete = createDeleteBtn();
+		btnBack.addEventListener('click', () => {
+			backButtonClick(block, btnDelete, listItem, title);
+			removeElement(btnBack);
+		});
+		listItem.append(btnDone, btnChange, btnDelete);
+		listItem.insertBefore(btnDone, listItem.firstChild);
+
+		btnDone.addEventListener('click', () => {
+			doneButtonClick(listItem, block, title, btnDelete, btnChange, btnDone, btnBack);
+		});
+		btnChange.addEventListener('click', () => {
+			changeButtonClick(title, listItem, block);
+			removeElement(btnChange)
+			removeElement(btnDone)
+			removeElement(btnDelete)
+		});
+		btnDelete.addEventListener('click', () => {
+		onDeleteButtonClick(block);
+		});
 }
 function changeButtonClick(title, listItem, block) {
 	removeElement(title);
@@ -72,41 +105,21 @@ function changeButtonClick(title, listItem, block) {
 	btnDelete.addEventListener('click', () => {
 		onDeleteButtonClick(block);
 	});
+
 	listItem.insertBefore(changeBtn, listItem.firstChild)
 	listItem.insertBefore(changeInp, listItem.firstChild)
 
-	changeBtn.onclick = () => {
-		title.textContent = changeInp.value
-
-		block.append(title)
-		block.insertBefore(title, block.firstChild)
-		removeElement(changeInp);
-		removeElement(changeBtn);
-
-		let btnDone = createDoneBtn();
-
-		let btnChange = createChangeBtn();
-		listItem.append(btnDone, btnChange, btnDelete);
-		listItem.insertBefore(btnDone, listItem.firstChild);
-
-		let btnBack = createBackBtn();
-		btnBack.addEventListener('click', () => {
-			backButtonClick(block, btnDelete, listItem, title);
-			removeElement(btnBack);
-		});
-
-		btnDone.addEventListener('click', () => {
-			doneButtonClick(listItem, block, title, btnDelete, btnChange, btnDone, btnBack);
-		});
-		btnChange.addEventListener('click', () => {
-			changeButtonClick(title, listItem, block);
-			removeElement(btnChange)
-			removeElement(btnDone)
+	changeInp.addEventListener("keypress", function(event) {
+	  	if (event.key === "Enter") {
+			event.preventDefault();
+			onTaskChangeName(listItem, title, block, changeInp, changeBtn);
 			removeElement(btnDelete)
-		});
-		btnDelete.addEventListener('click', () => {
-		onDeleteButtonClick(block);
-		});
+  		}
+	});
+
+	changeBtn.onclick = () => {
+		onTaskChangeName(listItem, title, block, changeInp, changeBtn);
+		removeElement(btnDelete)
 	}
 }
 
@@ -194,11 +207,16 @@ const onCreateTask = () => {
 input.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
 	event.preventDefault();
-	onCreateTask();
+	if (input.value.trim()) {
+        onCreateTask();
+    }
   }
+
 });
 
 btn.onclick = () => {
-	onCreateTask();
+    if (input.value.trim()) {
+        onCreateTask();
+    }
 }
 
